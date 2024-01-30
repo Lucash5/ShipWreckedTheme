@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class InventoryScript : MonoBehaviour
@@ -8,11 +9,14 @@ public class InventoryScript : MonoBehaviour
     public Canvas invUI;
     List<string> inventory = new List<string>();
     string[] itemlist = { "Apple" };
-   
+    
+    public Image[] image;
+    public Sprite[] PNGs;
 
     // Start is called before the first frame update
     void Start()
     {
+       
         
     }
 
@@ -21,7 +25,20 @@ public class InventoryScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            openclose();
+        }
+    }
+
+
+    private void openclose()
+    {
+        if (invUI.enabled == false)
+        {
             invUI.enabled = true;
+        }
+        else
+        {
+            invUI.enabled = false;
         }
     }
 
@@ -51,6 +68,14 @@ public class InventoryScript : MonoBehaviour
                 if (owns == false)
                 {
                 inventory.Add(item);
+                    foreach (Sprite name in PNGs)
+                    {
+                        if (name.name == item)
+                        {
+                   image[inventory.Count - 1].sprite = name;
+                        }
+                    }
+                
                 inventory.Add("1");
                 }
 
