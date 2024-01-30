@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
-    public Canvas invUI;
+    bool C;
+    bool I;
+    public GameObject crafting;
+    public GameObject Items;
     List<string> inventory = new List<string>();
     string[] itemlist = { "Apple" };
     
@@ -32,13 +35,15 @@ public class InventoryScript : MonoBehaviour
 
     private void openclose()
     {
-        if (invUI.enabled == false)
+        if (I == false)
         {
-            invUI.enabled = true;
+            I = true;
+            Items.SetActive(true);
         }
         else
         {
-            invUI.enabled = false;
+            I = false;
+            Items.SetActive(false);
         }
     }
 
@@ -88,4 +93,22 @@ public class InventoryScript : MonoBehaviour
             }
         }
     }
+    
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKeyDown(KeyCode.C) && collision.gameObject.name == "Workbench" && C == false)
+        {
+            C =true;
+            crafting.SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.C) && collision.gameObject.name == "Workbench" && C == true)
+        {
+            C = false;
+            crafting.SetActive(false);
+        }
+     
+    }
+
+
+
 }
